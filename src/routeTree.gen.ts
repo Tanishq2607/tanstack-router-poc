@@ -9,14 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PostRouteImport } from './routes/post'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as DemoLayoutRouteImport } from './routes/_demoLayout'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
 import { Route as UsersUserIdRouteImport } from './routes/users/$userId'
+import { Route as PostPostIdRouteImport } from './routes/post.$postId'
+import { Route as DemoLayoutDemoRouteImport } from './routes/_demoLayout.demo'
 
+const PostRoute = PostRouteImport.update({
+  id: '/post',
+  path: '/post',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoLayoutRoute = DemoLayoutRouteImport.update({
+  id: '/_demoLayout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -34,48 +47,107 @@ const UsersUserIdRoute = UsersUserIdRouteImport.update({
   path: '/users/$userId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PostPostIdRoute = PostPostIdRouteImport.update({
+  id: '/$postId',
+  path: '/$postId',
+  getParentRoute: () => PostRoute,
+} as any)
+const DemoLayoutDemoRoute = DemoLayoutDemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => DemoLayoutRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/post': typeof PostRouteWithChildren
+  '/demo': typeof DemoLayoutDemoRoute
+  '/post/$postId': typeof PostPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/users/': typeof UsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/post': typeof PostRouteWithChildren
+  '/demo': typeof DemoLayoutDemoRoute
+  '/post/$postId': typeof PostPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/users': typeof UsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_demoLayout': typeof DemoLayoutRouteWithChildren
   '/about': typeof AboutRoute
+  '/post': typeof PostRouteWithChildren
+  '/_demoLayout/demo': typeof DemoLayoutDemoRoute
+  '/post/$postId': typeof PostPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/users/': typeof UsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/users/$userId' | '/users/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/post'
+    | '/demo'
+    | '/post/$postId'
+    | '/users/$userId'
+    | '/users/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/users/$userId' | '/users'
-  id: '__root__' | '/' | '/about' | '/users/$userId' | '/users/'
+  to:
+    | '/'
+    | '/about'
+    | '/post'
+    | '/demo'
+    | '/post/$postId'
+    | '/users/$userId'
+    | '/users'
+  id:
+    | '__root__'
+    | '/'
+    | '/_demoLayout'
+    | '/about'
+    | '/post'
+    | '/_demoLayout/demo'
+    | '/post/$postId'
+    | '/users/$userId'
+    | '/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DemoLayoutRoute: typeof DemoLayoutRouteWithChildren
   AboutRoute: typeof AboutRoute
+  PostRoute: typeof PostRouteWithChildren
   UsersUserIdRoute: typeof UsersUserIdRoute
   UsersIndexRoute: typeof UsersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/post': {
+      id: '/post'
+      path: '/post'
+      fullPath: '/post'
+      preLoaderRoute: typeof PostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_demoLayout': {
+      id: '/_demoLayout'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof DemoLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -99,12 +171,50 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersUserIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/post/$postId': {
+      id: '/post/$postId'
+      path: '/$postId'
+      fullPath: '/post/$postId'
+      preLoaderRoute: typeof PostPostIdRouteImport
+      parentRoute: typeof PostRoute
+    }
+    '/_demoLayout/demo': {
+      id: '/_demoLayout/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoLayoutDemoRouteImport
+      parentRoute: typeof DemoLayoutRoute
+    }
   }
 }
 
+interface DemoLayoutRouteChildren {
+  DemoLayoutDemoRoute: typeof DemoLayoutDemoRoute
+}
+
+const DemoLayoutRouteChildren: DemoLayoutRouteChildren = {
+  DemoLayoutDemoRoute: DemoLayoutDemoRoute,
+}
+
+const DemoLayoutRouteWithChildren = DemoLayoutRoute._addFileChildren(
+  DemoLayoutRouteChildren,
+)
+
+interface PostRouteChildren {
+  PostPostIdRoute: typeof PostPostIdRoute
+}
+
+const PostRouteChildren: PostRouteChildren = {
+  PostPostIdRoute: PostPostIdRoute,
+}
+
+const PostRouteWithChildren = PostRoute._addFileChildren(PostRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DemoLayoutRoute: DemoLayoutRouteWithChildren,
   AboutRoute: AboutRoute,
+  PostRoute: PostRouteWithChildren,
   UsersUserIdRoute: UsersUserIdRoute,
   UsersIndexRoute: UsersIndexRoute,
 }

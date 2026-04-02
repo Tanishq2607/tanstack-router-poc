@@ -23,7 +23,13 @@ function Users() {
       <ul>
         {data.map((u: User) => (
           <li key={u.id} className='mb-2'>
-            <Link className='text-blue-500 hover:text-blue-700' to="/users/$userId" params={{userId: u.id}}>
+            <Link 
+            className='text-blue-500 hover:text-blue-700' 
+            to="/users/$userId" 
+            params={{userId: u.id}}>
+            mask={{
+              to: '/user',
+            }}
               {u.firstName}
             </Link>
           </li>
