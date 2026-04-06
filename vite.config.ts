@@ -9,6 +9,7 @@ export default defineConfig({
     tanstackRouter({
       target: 'react',
       autoCodeSplitting: true,
+      virtualRouteConfig: './src/virtualRoutes.ts', 
     }),
     react(),
     tailwindcss(),

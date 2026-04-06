@@ -14,6 +14,9 @@ const Navbar = () => {
           to="/users"
           search={{ page: 1 }}
           activeProps={{ className: "font-bold" }}
+        // mask={{
+        //   to: '/users-list',
+        // }}
         >
           Users
         </Link>
@@ -23,6 +26,7 @@ const Navbar = () => {
         <Link to="/post" activeProps={{ className: "font-bold" }}>
           post
         </Link>
+        <Link to="/products" activeProps={{ className: "font-bold" }}>Products</Link>
       </div>
     </>
   )

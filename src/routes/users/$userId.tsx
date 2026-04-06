@@ -29,7 +29,13 @@ function UserID() {
           <span>{data.age}</span>
         </div>
       </div>
-      <Link className='text-blue-500 hover:text-blue-700' to='/users' search={{page: 2}}>Back to the UserList</Link>
+      <Link 
+        className='text-blue-500 hover:text-blue-700' 
+        to='/users' 
+        search={{page: 2}}
+      >
+          Back to the UserList
+      </Link>
     </div>
   )
 }
