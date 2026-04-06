@@ -9,6 +9,7 @@ export default defineConfig({
     tanstackRouter({
       target: 'react',
       autoCodeSplitting: true,
+      generatedRouteTree: './src/routeTree.gen.ts',
       virtualRouteConfig: './src/virtualRoutes.ts', 
     }),
     react(),

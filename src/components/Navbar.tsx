@@ -26,7 +26,7 @@ const Navbar = () => {
         <Link to="/post" activeProps={{ className: "font-bold" }}>
           post
         </Link>
-        <Link to="/products" activeProps={{ className: "font-bold" }}>Products</Link>
+        <Link to="/shops" activeProps={{ className: "font-bold" }}>features</Link>
       </div>
     </>
   )

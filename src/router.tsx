@@ -6,8 +6,7 @@ import { routeTree } from './routeTree.gen';
 
 // Create a new router instance
 const router = createRouter({
-  routeTree: routeTree, // base = file-based
-  routeMasks: [], // optional, for masking demo later
+  routeTree: routeTree,
 })
 
 // Register the router instance for type safety

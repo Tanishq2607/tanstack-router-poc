@@ -14,12 +14,12 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as DemoLayoutRouteImport } from './routes/_demoLayout'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
-import { Route as ProductsIndexRouteImport } from './pages/productss/index'
+import { Route as DotDotPagesFeaturesIndexRouteImport } from './pages/features/index'
 import { Route as UsersUserIdRouteImport } from './routes/users/$userId'
-import { Route as ProductsProductIdRouteImport } from './pages/productss/$productId'
-import { Route as PostPostIdRouteImport } from './routes/post.$postId'
-import { Route as DemoLayoutDemoRouteImport } from './routes/_demoLayout.demo'
-import { Route as PostPostIdModelRouteImport } from './routes/post.$postId.model'
+import { Route as DotDotPagesFeaturesFeatureIdRouteImport } from './pages/features/$featureId'
+import { Route as PostDotpostIdRouteImport } from './routes/post.$postId'
+import { Route as DemoLayoutDotdemoRouteImport } from './routes/_demoLayout.demo'
+import { Route as PostDotpostIdDotmodelRouteImport } from './routes/post.$postId.model'
 
 const PostRoute = PostRouteImport.update({
   id: '/post',
@@ -45,60 +45,62 @@ const UsersIndexRoute = UsersIndexRouteImport.update({
   path: '/users/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsIndexRoute = ProductsIndexRouteImport.update({
-  id: '/products/',
-  path: '/products/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const DotDotPagesFeaturesIndexRoute =
+  DotDotPagesFeaturesIndexRouteImport.update({
+    id: '/shops/',
+    path: '/shops/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const UsersUserIdRoute = UsersUserIdRouteImport.update({
   id: '/users/$userId',
   path: '/users/$userId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsProductIdRoute = ProductsProductIdRouteImport.update({
-  id: '/products/$productId',
-  path: '/products/$productId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PostPostIdRoute = PostPostIdRouteImport.update({
+const DotDotPagesFeaturesFeatureIdRoute =
+  DotDotPagesFeaturesFeatureIdRouteImport.update({
+    id: '/shops/$featureId',
+    path: '/shops/$featureId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const PostDotpostIdRoute = PostDotpostIdRouteImport.update({
   id: '/$postId',
   path: '/$postId',
   getParentRoute: () => PostRoute,
 } as any)
-const DemoLayoutDemoRoute = DemoLayoutDemoRouteImport.update({
+const DemoLayoutDotdemoRoute = DemoLayoutDotdemoRouteImport.update({
   id: '/demo',
   path: '/demo',
   getParentRoute: () => DemoLayoutRoute,
 } as any)
-const PostPostIdModelRoute = PostPostIdModelRouteImport.update({
+const PostDotpostIdDotmodelRoute = PostDotpostIdDotmodelRouteImport.update({
   id: '/model',
   path: '/model',
-  getParentRoute: () => PostPostIdRoute,
+  getParentRoute: () => PostDotpostIdRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/post': typeof PostRouteWithChildren
-  '/demo': typeof DemoLayoutDemoRoute
-  '/post/$postId': typeof PostPostIdRouteWithChildren
-  '/products/$productId': typeof ProductsProductIdRoute
+  '/demo': typeof DemoLayoutDotdemoRoute
+  '/post/$postId': typeof PostDotpostIdRouteWithChildren
+  '/shops/$featureId': typeof DotDotPagesFeaturesFeatureIdRoute
   '/users/$userId': typeof UsersUserIdRoute
-  '/products/': typeof ProductsIndexRoute
+  '/shops/': typeof DotDotPagesFeaturesIndexRoute
   '/users/': typeof UsersIndexRoute
-  '/post/$postId/model': typeof PostPostIdModelRoute
+  '/post/$postId/model': typeof PostDotpostIdDotmodelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/post': typeof PostRouteWithChildren
-  '/demo': typeof DemoLayoutDemoRoute
-  '/post/$postId': typeof PostPostIdRouteWithChildren
-  '/products/$productId': typeof ProductsProductIdRoute
+  '/demo': typeof DemoLayoutDotdemoRoute
+  '/post/$postId': typeof PostDotpostIdRouteWithChildren
+  '/shops/$featureId': typeof DotDotPagesFeaturesFeatureIdRoute
   '/users/$userId': typeof UsersUserIdRoute
-  '/products': typeof ProductsIndexRoute
+  '/shops': typeof DotDotPagesFeaturesIndexRoute
   '/users': typeof UsersIndexRoute
-  '/post/$postId/model': typeof PostPostIdModelRoute
+  '/post/$postId/model': typeof PostDotpostIdDotmodelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -106,13 +108,13 @@ export interface FileRoutesById {
   '/_demoLayout': typeof DemoLayoutRouteWithChildren
   '/about': typeof AboutRoute
   '/post': typeof PostRouteWithChildren
-  '/_demoLayout/demo': typeof DemoLayoutDemoRoute
-  '/post/$postId': typeof PostPostIdRouteWithChildren
-  '/products/$productId': typeof ProductsProductIdRoute
+  '/_demoLayout/demo': typeof DemoLayoutDotdemoRoute
+  '/post/$postId': typeof PostDotpostIdRouteWithChildren
+  '/shops/$featureId': typeof DotDotPagesFeaturesFeatureIdRoute
   '/users/$userId': typeof UsersUserIdRoute
-  '/products/': typeof ProductsIndexRoute
+  '/shops/': typeof DotDotPagesFeaturesIndexRoute
   '/users/': typeof UsersIndexRoute
-  '/post/$postId/model': typeof PostPostIdModelRoute
+  '/post/$postId/model': typeof PostDotpostIdDotmodelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -122,9 +124,9 @@ export interface FileRouteTypes {
     | '/post'
     | '/demo'
     | '/post/$postId'
-    | '/products/$productId'
+    | '/shops/$featureId'
     | '/users/$userId'
-    | '/products/'
+    | '/shops/'
     | '/users/'
     | '/post/$postId/model'
   fileRoutesByTo: FileRoutesByTo
@@ -134,9 +136,9 @@ export interface FileRouteTypes {
     | '/post'
     | '/demo'
     | '/post/$postId'
-    | '/products/$productId'
+    | '/shops/$featureId'
     | '/users/$userId'
-    | '/products'
+    | '/shops'
     | '/users'
     | '/post/$postId/model'
   id:
@@ -147,9 +149,9 @@ export interface FileRouteTypes {
     | '/post'
     | '/_demoLayout/demo'
     | '/post/$postId'
-    | '/products/$productId'
+    | '/shops/$featureId'
     | '/users/$userId'
-    | '/products/'
+    | '/shops/'
     | '/users/'
     | '/post/$postId/model'
   fileRoutesById: FileRoutesById
@@ -159,9 +161,9 @@ export interface RootRouteChildren {
   DemoLayoutRoute: typeof DemoLayoutRouteWithChildren
   AboutRoute: typeof AboutRoute
   PostRoute: typeof PostRouteWithChildren
-  ProductsProductIdRoute: typeof ProductsProductIdRoute
+  DotDotPagesFeaturesFeatureIdRoute: typeof DotDotPagesFeaturesFeatureIdRoute
   UsersUserIdRoute: typeof UsersUserIdRoute
-  ProductsIndexRoute: typeof ProductsIndexRoute
+  DotDotPagesFeaturesIndexRoute: typeof DotDotPagesFeaturesIndexRoute
   UsersIndexRoute: typeof UsersIndexRoute
 }
 
@@ -202,11 +204,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/': {
-      id: '/products/'
-      path: '/products'
-      fullPath: '/products/'
-      preLoaderRoute: typeof ProductsIndexRouteImport
+    '/shops/': {
+      id: '/shops/'
+      path: '/shops'
+      fullPath: '/shops/'
+      preLoaderRoute: typeof DotDotPagesFeaturesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/users/$userId': {
@@ -216,67 +218,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersUserIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products/$productId': {
-      id: '/products/$productId'
-      path: '/products/$productId'
-      fullPath: '/products/$productId'
-      preLoaderRoute: typeof ProductsProductIdRouteImport
+    '/shops/$featureId': {
+      id: '/shops/$featureId'
+      path: '/shops/$featureId'
+      fullPath: '/shops/$featureId'
+      preLoaderRoute: typeof DotDotPagesFeaturesFeatureIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/post/$postId': {
       id: '/post/$postId'
       path: '/$postId'
       fullPath: '/post/$postId'
-      preLoaderRoute: typeof PostPostIdRouteImport
+      preLoaderRoute: typeof PostDotpostIdRouteImport
       parentRoute: typeof PostRoute
     }
     '/_demoLayout/demo': {
       id: '/_demoLayout/demo'
       path: '/demo'
       fullPath: '/demo'
-      preLoaderRoute: typeof DemoLayoutDemoRouteImport
+      preLoaderRoute: typeof DemoLayoutDotdemoRouteImport
       parentRoute: typeof DemoLayoutRoute
     }
     '/post/$postId/model': {
       id: '/post/$postId/model'
       path: '/model'
       fullPath: '/post/$postId/model'
-      preLoaderRoute: typeof PostPostIdModelRouteImport
-      parentRoute: typeof PostPostIdRoute
+      preLoaderRoute: typeof PostDotpostIdDotmodelRouteImport
+      parentRoute: typeof PostDotpostIdRoute
     }
   }
 }
 
 interface DemoLayoutRouteChildren {
-  DemoLayoutDemoRoute: typeof DemoLayoutDemoRoute
+  DemoLayoutDotdemoRoute: typeof DemoLayoutDotdemoRoute
 }
 
 const DemoLayoutRouteChildren: DemoLayoutRouteChildren = {
-  DemoLayoutDemoRoute: DemoLayoutDemoRoute,
+  DemoLayoutDotdemoRoute: DemoLayoutDotdemoRoute,
 }
 
 const DemoLayoutRouteWithChildren = DemoLayoutRoute._addFileChildren(
   DemoLayoutRouteChildren,
 )
 
-interface PostPostIdRouteChildren {
-  PostPostIdModelRoute: typeof PostPostIdModelRoute
+interface PostDotpostIdRouteChildren {
+  PostDotpostIdDotmodelRoute: typeof PostDotpostIdDotmodelRoute
 }
 
-const PostPostIdRouteChildren: PostPostIdRouteChildren = {
-  PostPostIdModelRoute: PostPostIdModelRoute,
+const PostDotpostIdRouteChildren: PostDotpostIdRouteChildren = {
+  PostDotpostIdDotmodelRoute: PostDotpostIdDotmodelRoute,
 }
 
-const PostPostIdRouteWithChildren = PostPostIdRoute._addFileChildren(
-  PostPostIdRouteChildren,
+const PostDotpostIdRouteWithChildren = PostDotpostIdRoute._addFileChildren(
+  PostDotpostIdRouteChildren,
 )
 
 interface PostRouteChildren {
-  PostPostIdRoute: typeof PostPostIdRouteWithChildren
+  PostDotpostIdRoute: typeof PostDotpostIdRouteWithChildren
 }
 
 const PostRouteChildren: PostRouteChildren = {
-  PostPostIdRoute: PostPostIdRouteWithChildren,
+  PostDotpostIdRoute: PostDotpostIdRouteWithChildren,
 }
 
 const PostRouteWithChildren = PostRoute._addFileChildren(PostRouteChildren)
@@ -286,9 +288,9 @@ const rootRouteChildren: RootRouteChildren = {
   DemoLayoutRoute: DemoLayoutRouteWithChildren,
   AboutRoute: AboutRoute,
   PostRoute: PostRouteWithChildren,
-  ProductsProductIdRoute: ProductsProductIdRoute,
+  DotDotPagesFeaturesFeatureIdRoute: DotDotPagesFeaturesFeatureIdRoute,
   UsersUserIdRoute: UsersUserIdRoute,
-  ProductsIndexRoute: ProductsIndexRoute,
+  DotDotPagesFeaturesIndexRoute: DotDotPagesFeaturesIndexRoute,
   UsersIndexRoute: UsersIndexRoute,
 }
 export const routeTree = rootRouteImport
