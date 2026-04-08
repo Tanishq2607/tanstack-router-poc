@@ -10,20 +10,32 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PostRouteImport } from './routes/post'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as DemoLayoutRouteImport } from './routes/_demoLayout'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
 import { Route as DotDotPagesFeaturesIndexRouteImport } from './pages/features/index'
+import { Route as ContactIndexRouteImport } from './routes/contact/index'
+import { Route as BlogsIndexRouteImport } from './routes/blogs/index'
 import { Route as UsersUserIdRouteImport } from './routes/users/$userId'
 import { Route as DotDotPagesFeaturesFeatureIdRouteImport } from './pages/features/$featureId'
 import { Route as PostDotpostIdRouteImport } from './routes/post.$postId'
+import { Route as FilesSplatRouteImport } from './routes/files/$'
 import { Route as DemoLayoutDotdemoRouteImport } from './routes/_demoLayout.demo'
+import { Route as authLoginRouteImport } from './routes/(auth)/login'
+import { Route as BlogsCategoryIndexRouteImport } from './routes/blogs/$category/index'
 import { Route as PostDotpostIdDotmodelRouteImport } from './routes/post.$postId.model'
+import { Route as BlogsCategorySlugRouteImport } from './routes/blogs/$category/$slug'
 
 const PostRoute = PostRouteImport.update({
   id: '/post',
   path: '/post',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -51,6 +63,16 @@ const DotDotPagesFeaturesIndexRoute =
     path: '/shops/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ContactIndexRoute = ContactIndexRouteImport.update({
+  id: '/contact/',
+  path: '/contact/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogsIndexRoute = BlogsIndexRouteImport.update({
+  id: '/blogs/',
+  path: '/blogs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UsersUserIdRoute = UsersUserIdRouteImport.update({
   id: '/users/$userId',
   path: '/users/$userId',
@@ -67,104 +89,173 @@ const PostDotpostIdRoute = PostDotpostIdRouteImport.update({
   path: '/$postId',
   getParentRoute: () => PostRoute,
 } as any)
+const FilesSplatRoute = FilesSplatRouteImport.update({
+  id: '/files/$',
+  path: '/files/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DemoLayoutDotdemoRoute = DemoLayoutDotdemoRouteImport.update({
   id: '/demo',
   path: '/demo',
   getParentRoute: () => DemoLayoutRoute,
+} as any)
+const authLoginRoute = authLoginRouteImport.update({
+  id: '/(auth)/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogsCategoryIndexRoute = BlogsCategoryIndexRouteImport.update({
+  id: '/blogs/$category/',
+  path: '/blogs/$category/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PostDotpostIdDotmodelRoute = PostDotpostIdDotmodelRouteImport.update({
   id: '/model',
   path: '/model',
   getParentRoute: () => PostDotpostIdRoute,
 } as any)
+const BlogsCategorySlugRoute = BlogsCategorySlugRouteImport.update({
+  id: '/blogs/$category/$slug',
+  path: '/blogs/$category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/home': typeof HomeRoute
   '/post': typeof PostRouteWithChildren
+  '/login': typeof authLoginRoute
   '/demo': typeof DemoLayoutDotdemoRoute
+  '/files/$': typeof FilesSplatRoute
   '/post/$postId': typeof PostDotpostIdRouteWithChildren
   '/shops/$featureId': typeof DotDotPagesFeaturesFeatureIdRoute
   '/users/$userId': typeof UsersUserIdRoute
+  '/blogs/': typeof BlogsIndexRoute
+  '/contact/': typeof ContactIndexRoute
   '/shops/': typeof DotDotPagesFeaturesIndexRoute
   '/users/': typeof UsersIndexRoute
+  '/blogs/$category/$slug': typeof BlogsCategorySlugRoute
   '/post/$postId/model': typeof PostDotpostIdDotmodelRoute
+  '/blogs/$category/': typeof BlogsCategoryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/home': typeof HomeRoute
   '/post': typeof PostRouteWithChildren
+  '/login': typeof authLoginRoute
   '/demo': typeof DemoLayoutDotdemoRoute
+  '/files/$': typeof FilesSplatRoute
   '/post/$postId': typeof PostDotpostIdRouteWithChildren
   '/shops/$featureId': typeof DotDotPagesFeaturesFeatureIdRoute
   '/users/$userId': typeof UsersUserIdRoute
+  '/blogs': typeof BlogsIndexRoute
+  '/contact': typeof ContactIndexRoute
   '/shops': typeof DotDotPagesFeaturesIndexRoute
   '/users': typeof UsersIndexRoute
+  '/blogs/$category/$slug': typeof BlogsCategorySlugRoute
   '/post/$postId/model': typeof PostDotpostIdDotmodelRoute
+  '/blogs/$category': typeof BlogsCategoryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_demoLayout': typeof DemoLayoutRouteWithChildren
   '/about': typeof AboutRoute
+  '/home': typeof HomeRoute
   '/post': typeof PostRouteWithChildren
+  '/(auth)/login': typeof authLoginRoute
   '/_demoLayout/demo': typeof DemoLayoutDotdemoRoute
+  '/files/$': typeof FilesSplatRoute
   '/post/$postId': typeof PostDotpostIdRouteWithChildren
   '/shops/$featureId': typeof DotDotPagesFeaturesFeatureIdRoute
   '/users/$userId': typeof UsersUserIdRoute
+  '/blogs/': typeof BlogsIndexRoute
+  '/contact/': typeof ContactIndexRoute
   '/shops/': typeof DotDotPagesFeaturesIndexRoute
   '/users/': typeof UsersIndexRoute
+  '/blogs/$category/$slug': typeof BlogsCategorySlugRoute
   '/post/$postId/model': typeof PostDotpostIdDotmodelRoute
+  '/blogs/$category/': typeof BlogsCategoryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/home'
     | '/post'
+    | '/login'
     | '/demo'
+    | '/files/$'
     | '/post/$postId'
     | '/shops/$featureId'
     | '/users/$userId'
+    | '/blogs/'
+    | '/contact/'
     | '/shops/'
     | '/users/'
+    | '/blogs/$category/$slug'
     | '/post/$postId/model'
+    | '/blogs/$category/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/home'
     | '/post'
+    | '/login'
     | '/demo'
+    | '/files/$'
     | '/post/$postId'
     | '/shops/$featureId'
     | '/users/$userId'
+    | '/blogs'
+    | '/contact'
     | '/shops'
     | '/users'
+    | '/blogs/$category/$slug'
     | '/post/$postId/model'
+    | '/blogs/$category'
   id:
     | '__root__'
     | '/'
     | '/_demoLayout'
     | '/about'
+    | '/home'
     | '/post'
+    | '/(auth)/login'
     | '/_demoLayout/demo'
+    | '/files/$'
     | '/post/$postId'
     | '/shops/$featureId'
     | '/users/$userId'
+    | '/blogs/'
+    | '/contact/'
     | '/shops/'
     | '/users/'
+    | '/blogs/$category/$slug'
     | '/post/$postId/model'
+    | '/blogs/$category/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DemoLayoutRoute: typeof DemoLayoutRouteWithChildren
   AboutRoute: typeof AboutRoute
+  HomeRoute: typeof HomeRoute
   PostRoute: typeof PostRouteWithChildren
+  authLoginRoute: typeof authLoginRoute
+  FilesSplatRoute: typeof FilesSplatRoute
   DotDotPagesFeaturesFeatureIdRoute: typeof DotDotPagesFeaturesFeatureIdRoute
   UsersUserIdRoute: typeof UsersUserIdRoute
+  BlogsIndexRoute: typeof BlogsIndexRoute
+  ContactIndexRoute: typeof ContactIndexRoute
   DotDotPagesFeaturesIndexRoute: typeof DotDotPagesFeaturesIndexRoute
   UsersIndexRoute: typeof UsersIndexRoute
+  BlogsCategorySlugRoute: typeof BlogsCategorySlugRoute
+  BlogsCategoryIndexRoute: typeof BlogsCategoryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -174,6 +265,13 @@ declare module '@tanstack/react-router' {
       path: '/post'
       fullPath: '/post'
       preLoaderRoute: typeof PostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -211,6 +309,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotDotPagesFeaturesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact/': {
+      id: '/contact/'
+      path: '/contact'
+      fullPath: '/contact/'
+      preLoaderRoute: typeof ContactIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blogs/': {
+      id: '/blogs/'
+      path: '/blogs'
+      fullPath: '/blogs/'
+      preLoaderRoute: typeof BlogsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/users/$userId': {
       id: '/users/$userId'
       path: '/users/$userId'
@@ -232,6 +344,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostDotpostIdRouteImport
       parentRoute: typeof PostRoute
     }
+    '/files/$': {
+      id: '/files/$'
+      path: '/files/$'
+      fullPath: '/files/$'
+      preLoaderRoute: typeof FilesSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_demoLayout/demo': {
       id: '/_demoLayout/demo'
       path: '/demo'
@@ -239,12 +358,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoLayoutDotdemoRouteImport
       parentRoute: typeof DemoLayoutRoute
     }
+    '/(auth)/login': {
+      id: '/(auth)/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof authLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blogs/$category/': {
+      id: '/blogs/$category/'
+      path: '/blogs/$category'
+      fullPath: '/blogs/$category/'
+      preLoaderRoute: typeof BlogsCategoryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/post/$postId/model': {
       id: '/post/$postId/model'
       path: '/model'
       fullPath: '/post/$postId/model'
       preLoaderRoute: typeof PostDotpostIdDotmodelRouteImport
       parentRoute: typeof PostDotpostIdRoute
+    }
+    '/blogs/$category/$slug': {
+      id: '/blogs/$category/$slug'
+      path: '/blogs/$category/$slug'
+      fullPath: '/blogs/$category/$slug'
+      preLoaderRoute: typeof BlogsCategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -287,11 +427,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DemoLayoutRoute: DemoLayoutRouteWithChildren,
   AboutRoute: AboutRoute,
+  HomeRoute: HomeRoute,
   PostRoute: PostRouteWithChildren,
+  authLoginRoute: authLoginRoute,
+  FilesSplatRoute: FilesSplatRoute,
   DotDotPagesFeaturesFeatureIdRoute: DotDotPagesFeaturesFeatureIdRoute,
   UsersUserIdRoute: UsersUserIdRoute,
+  BlogsIndexRoute: BlogsIndexRoute,
+  ContactIndexRoute: ContactIndexRoute,
   DotDotPagesFeaturesIndexRoute: DotDotPagesFeaturesIndexRoute,
   UsersIndexRoute: UsersIndexRoute,
+  BlogsCategorySlugRoute: BlogsCategorySlugRoute,
+  BlogsCategoryIndexRoute: BlogsCategoryIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

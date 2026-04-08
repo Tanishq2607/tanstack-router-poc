@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { fetchUsers } from '../../api/users'
+import { fetchUsers, type User } from '../../api/users'
 
 export const Route = createFileRoute('/users/')({
   validateSearch: (search) => {

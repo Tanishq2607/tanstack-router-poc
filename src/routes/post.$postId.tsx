@@ -9,7 +9,7 @@ function PostDetail() {
   const location = useLocation()
 
   const isModal = location.pathname.endsWith('/model')
-
+  
   return (
     <div>
       {!isModal && <h3>Post ID: {postId}</h3>}
